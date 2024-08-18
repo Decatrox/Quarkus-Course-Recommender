@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import io.quarkus.test.InjectMock;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
@@ -202,5 +204,19 @@ class CourseControllerTest {
                 .when().post()
                 .then()
                 .statusCode(400);
+    }
+
+    @Test
+    void itShouldCallViewAllCourse() {
+        List<CourseGetDTO> courseGetDTOList = new ArrayList<>();
+        when(courseService.viewAllCourses()).thenReturn(courseGetDTOList);
+
+        given()
+                .contentType("application/json")
+                .when().get()
+                .then()
+                .statusCode(200);
+
+        verify(courseService).viewAllCourses();
     }
 }

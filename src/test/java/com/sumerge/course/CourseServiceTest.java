@@ -3,12 +3,14 @@ package com.sumerge.course;
 import com.sumerge.exception_handling.custom_exceptions.CourseAlreadyExistsException;
 import com.sumerge.exception_handling.custom_exceptions.CourseNotFoundException;
 import com.sumerge.mapper.MapStructMapper;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -155,6 +157,14 @@ class CourseServiceTest {
 
         assertThatThrownBy(() -> courseService.deleteCourse(id))
                 .isInstanceOf(CourseNotFoundException.class);
+    }
+
+    @Test
+    void itShouldGetAllCourses() {
+        PanacheQuery<Course> mockQuery = Mockito.mock(PanacheQuery.class);
+        org.mockito.Mockito.when(courseRepository.findAll()).thenReturn(mockQuery);
+        courseService.viewAllCourses();
+        verify(courseRepository).findAll();
     }
 
 }
