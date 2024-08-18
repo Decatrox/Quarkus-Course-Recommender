@@ -1,4 +1,4 @@
-package com.sumerge.course_recommender.course;
+package com.sumerge.course;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Max;
@@ -9,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class CoursePostDTO {
+
     @JsonProperty("name")
     @NotBlank(message = "Name is required")
     private String name;

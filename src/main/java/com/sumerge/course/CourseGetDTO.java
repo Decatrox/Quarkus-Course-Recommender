@@ -1,4 +1,4 @@
-package com.sumerge.course_recommender.course;
+package com.sumerge.course;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
