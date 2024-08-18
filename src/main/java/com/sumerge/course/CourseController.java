@@ -61,7 +61,7 @@ public class CourseController {
     })
     @PUT
     @Path("/{id}")
-    public Response updateCourse(@PathParam("id") UUID id, CoursePostDTO course) {
+    public Response updateCourse(@PathParam("id") UUID id, @Valid CoursePostDTO course) {
         return Response.ok(courseService.updateCourse(id, course)).build();
     }
 
